@@ -4,26 +4,30 @@
 
     public static partial class AppLinks
     {
-        public static List<AppLinkData> GetAppLinkDatas(params string[] parameters)
+        static AppLinks()
+        {
+            UIRuntime.OnNewIntent.Handle(intent => GetAppLinkDatas(intent));
+        }
+
+        static void GetAppLinkDatas(Android.Content.Intent intent)
         {
             var result = new List<AppLinkData>();
-            var mainActivity = UIRuntime.CurrentActivity;
-            if (mainActivity.Intent.HasExtra("al_applink_data"))
+            if (intent.HasExtra("al_applink_data"))
             {
-                var appLinkData = mainActivity.Intent.GetStringExtra("al_applink_data");
+                var appLinkData = intent.GetStringExtra("al_applink_data");
 
-                var alUrl = new Rivets.AppLinkUrl(mainActivity.Intent.Data.ToString(), appLinkData);
+                var alUrl = new Rivets.AppLinkUrl(intent.Data.ToString(), appLinkData);
 
                 if (alUrl != null)
                 {
-                    foreach (var param in parameters)
+                    foreach (var param in alUrl.InputQueryParameters)
                     {
-                        if (alUrl.InputQueryParameters.ContainsKey(param)) result.Add(new AppLinkData(param, alUrl.InputQueryParameters[param]));
+                        result.Add(new AppLinkData(param.Key, param.Value));
                     }
                 }
             }
 
-            return result;
+            OnAppLinkReceived?.Raise(result);
         }
     }
 }

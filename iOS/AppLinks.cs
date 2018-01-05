@@ -5,20 +5,25 @@
 
     public static partial class AppLinks
     {
-        public static List<AppLinkData> GetAppLinkDatas(NSUrl url,params string[] parameters)
+        static AppLinks()
+        {
+            UIRuntime.OnOpenUrl.Handle(url => GetAppLinkDatas(url));
+        }
+
+        static void GetAppLinkDatas(NSUrl url)
         {
             var result = new List<AppLinkData>();
             var rurl = new Rivets.AppLinkUrl(url.ToString());
 
             if (rurl != null)
             {
-                foreach (var param in parameters)
+                foreach (var param in rurl.InputQueryParameters)
                 {
-                    if (rurl.InputQueryParameters.ContainsKey(param)) result.Add(new AppLinkData(param, rurl.InputQueryParameters[param]));
+                    result.Add(new AppLinkData(param.Key, param.Value));
                 }
             }
 
-            return result;
+            OnAppLinkReceived?.Raise(result);
         }
     }
 }

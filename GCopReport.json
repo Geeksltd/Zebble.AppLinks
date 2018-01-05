@@ -2,7 +2,7 @@
   "Items": [
     {
       "Analyzer": "UnusedMethodsAnalyzer",
-      "OccurrenceCount": 8,
+      "OccurrenceCount": 9,
       "Exceptions": null,
       "SentToServer": true,
       "InstallationName": "DESKTOP-LLCTIMB"

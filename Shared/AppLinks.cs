@@ -1,9 +1,13 @@
 ﻿namespace Zebble
 {
+    using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public static partial class AppLinks
     {
+        public static AsyncEvent<List<AppLinkData>> OnAppLinkReceived = new AsyncEvent<List<AppLinkData>>();
+
         public static Task<NavigationResult> Navigate(string url)
         {
             return Device.UIThread.Run(async () =>
