@@ -74,7 +74,31 @@ In IOS platform you need to set the scheme and application URL in the “Info.plis
 ```
 
 After that configuration you can use “OnAppLinkReceived” event like Android platform.
+
+##### UWP:
+
+In UWP platform you need to add a protocol extention into the UWP manifest file and set a name for your application like below:
+
+```xml
+<Package ... >
+    ...
+    ...
+    <Applications>
+        <Application Id="App" ... >
+            <Extensions>
+            <uap:Extension Category="windows.protocol">
+              <uap:Protocol Name="com.example" />
+            </uap:Extension>
+          </Extensions>
+        </Application>
+        ...
+    </Applications>
+    ..
+</Package>
+```
  
+After that you can navigate to an URL like other platforms and receive incoming request from other applications by using "OnAppLinkReceived" event.
+
 ### App Link Specification
 
 To create and advertise your application in web site and open the application you can use below meta-tags for each platform:
@@ -90,6 +114,11 @@ To create and advertise your application in web site and open the application yo
 	<meta property="al:android:package" content="com.example" />
 	<meta property="al:android:url" content="example://products?id=widget" />
 	<meta property="al:android:app_name" content="Example Store" />
+    
+        <!-- Windows -->
+        <meta property="al:windows_phone:url" content="com.example://products?id=widget" />
+        <meta property="al:windows_phone:app_name" content="Example Store" />
+        <meta property="al:windows_phone:app_id" content="a14e93aa-27c7-df11-a844-00237de2db9f" />
 </head>
 </html>
 ```
