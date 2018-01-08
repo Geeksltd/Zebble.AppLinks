@@ -218,5 +218,5 @@ FakesAssemblies/
 .ntvs_analysis.dat
 node_modules/
 
-lib
+/lib
 Zebble.exe
