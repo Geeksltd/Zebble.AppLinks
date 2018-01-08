@@ -112,13 +112,12 @@
 
         static void GetAppLinkDatas(Tuple<IActivatedEventArgs, Windows.UI.Xaml.Window> args)
         {
-            var result = new List<AppLinkData>();
+            var result = new List<Data>();
             var rootFrame = args.Item2.Content as Frame;
 
             if (rootFrame == null)
-            {
                 rootFrame = new Frame();
-            }
+
             args.Item2.Content = rootFrame;
 
             if (args.Item1.Kind == ActivationKind.Protocol)
@@ -132,7 +131,7 @@
                     if (!query.Contains("=")) continue;
 
                     var parameter = query.Split(new string[] { "=" }, StringSplitOptions.RemoveEmptyEntries);
-                    result.Add(new AppLinkData(parameter[0], parameter[1]));
+                    result.Add(new Data(parameter[0], parameter[1]));
                 }
             }
 

@@ -17,9 +17,9 @@
     public class MetaAttributeResult
     {
         public List<MetaAttribute> MetaAttributes { get; set; }
-        public NavigationResult NavigationResult { get; set; }
+        public AppLinks.NavigationResult NavigationResult { get; set; }
 
-        public MetaAttributeResult(List<MetaAttribute> metaAttributes, NavigationResult navigationResult)
+        public MetaAttributeResult(List<MetaAttribute> metaAttributes, AppLinks.NavigationResult navigationResult)
         {
             MetaAttributes = metaAttributes;
             NavigationResult = navigationResult;

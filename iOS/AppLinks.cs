@@ -7,21 +7,17 @@
     {
         static AppLinks()
         {
-            UIRuntime.OnOpenUrl.Handle(url => GetAppLinkDatas(url));
+            UIRuntime.OnOpenUrl.Handle(url => ExtractAppLinkData(url));
         }
 
-        static void GetAppLinkDatas(NSUrl url)
+        static void ExtractAppLinkData(NSUrl url)
         {
-            var result = new List<AppLinkData>();
+            var result = new List<Data>();
             var rurl = new Rivets.AppLinkUrl(url.ToString());
 
             if (rurl != null)
-            {
                 foreach (var param in rurl.InputQueryParameters)
-                {
-                    result.Add(new AppLinkData(param.Key, param.Value));
-                }
-            }
+                    result.Add(new Data(param.Key, param.Value));
 
             OnAppLinkReceived?.Raise(result);
         }

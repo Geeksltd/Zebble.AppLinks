@@ -16,8 +16,6 @@
     <None Include="$(MSBuildThisFileDirectory)NuGet\Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)AppLinkData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AppLinks.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NavigationResult.cs" />
   </ItemGroup>
 </Project>
