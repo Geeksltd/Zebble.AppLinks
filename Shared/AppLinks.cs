@@ -8,6 +8,7 @@
     {
         public static AsyncEvent<List<AppLinkData>> OnAppLinkReceived = new AsyncEvent<List<AppLinkData>>();
 
+#if ANDROID || IOS
         public static Task<NavigationResult> Navigate(string url)
         {
             return Device.UIThread.Run(async () =>
@@ -32,5 +33,6 @@
                 return result;
             });
         }
+#endif
     }
 }
