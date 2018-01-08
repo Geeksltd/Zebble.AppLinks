@@ -110,20 +110,20 @@
             }
         }
 
-        static void GetAppLinkDatas(UWP.ActivatedEventArgs args)
+        static void GetAppLinkDatas(Tuple<IActivatedEventArgs, Windows.UI.Xaml.Window> args)
         {
             var result = new List<AppLinkData>();
-            var rootFrame = args.CurrentWindow.Content as Frame;
+            var rootFrame = args.Item2.Content as Frame;
 
             if (rootFrame == null)
             {
                 rootFrame = new Frame();
             }
-            args.CurrentWindow.Content = rootFrame;
+            args.Item2.Content = rootFrame;
 
-            if (args.Args.Kind == ActivationKind.Protocol)
+            if (args.Item1.Kind == ActivationKind.Protocol)
             {
-                var protocolArgs = args.Args as ProtocolActivatedEventArgs;
+                var protocolArgs = args.Item1 as ProtocolActivatedEventArgs;
 
                 var queries = protocolArgs.Uri.Query.Replace("?", string.Empty).Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -137,7 +137,7 @@
             }
 
             OnAppLinkReceived?.Raise(result);
-            args.CurrentWindow.Activate();
+            args.Item2.Activate();
         }
     }
 }
