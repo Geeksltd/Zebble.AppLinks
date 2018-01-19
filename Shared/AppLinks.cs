@@ -10,7 +10,7 @@
 #if ANDROID || IOS
         public static Task<NavigationResult> Navigate(string url)
         {
-            return Device.UIThread.Run(async () =>
+            return Thread.UI.Run(async () =>
             {
                 NavigationResult result;
                 var navigatorResult = await Rivets.AppLinks.Navigator.Navigate(url);

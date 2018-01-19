@@ -1,11 +1,11 @@
 ﻿{
   "dependencies": {
-    "HtmlAgilityPack": "1.6.11",
+    "HtmlAgilityPack": "1.6.13",
     "Microsoft.Bcl.Build": "1.0.21",
     "Newtonsoft.Json": "9.0.1",
     "Rivets": "1.0.5",
     "Xamarin.Build.Download": "0.4.7",
-    "Zebble": "4.2.375"
+    "Zebble": "4.3.100"
   },
   "frameworks": {
     "uap10.0.10240": {}
