@@ -2,11 +2,11 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Zebble.AppLinks</id>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <title>AppLinks for Zebble (Xamarin)</title>
     <projectUrl>https://github.com/Geeksltd/Zebble.AppLinks</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/Geeksltd/Zebble.AppLinks/master/Shared/NuGet/Icon.png</iconUrl>
-    <copyright>Copyright ©2018 Geeks Ltd - All rights reserved.</copyright>
+    <copyright>Copyright © 2018 Geeks Ltd - All rights reserved.</copyright>
     <description>AppLinks is a Zebble implementation of facebook AppLinks. AppLinks is an open source and cross-platform library for linking mobile and web application. It is available for Android, iOS and UWP platforms.</description>
     <authors>Geeks Ltd</authors>
     <owners>Geeks Ltd</owners>
