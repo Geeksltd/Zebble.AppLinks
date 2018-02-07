@@ -1,13 +1,26 @@
-AppLinks
-----------
-AppLinks is a Zebble implementation of facebook AppLinks. AppLinks is an open source and cross-platform library for linking mobile and web application. It is available on NuGet and implemented for Android, iOS and UWP platforms.
+[logo]: https://raw.githubusercontent.com/Geeksltd/Zebble.AppLinks/master/Shared/NuGet/Icon.png "Zebble.AppLinks"
 
-### What is AppLinks? 
-App Links are a defined set of metadata that can be advertised within HTML of web pages that specify how to deep link to content inside of a Mobile app.
+## Zebble.AppLinks
 
-- **Mobile Deep Linking from the Web**: Web pages can advertise special <metadata ... /> tags within a normal web page, which specify how to deep link to content inside of a particular Mobile app.
-- **Mobile to Mobile Linking**: Mobile apps can resolve meta-data from Web links into links for other mobile apps.
-### How to use AppLinks in Zebble?
+![logo]
+
+AppLinks is a Zebble implementation of facebook AppLinks
+
+
+[![NuGet](https://img.shields.io/nuget/v/Zebble.AppLinks.svg?label=NuGet)](https://www.nuget.org/packages/Zebble.AppLinks/)
+
+> App Links are a defined set of metadata that can be advertised within HTML of web pages that specify how to deep link to content inside of a Mobile app. This is an open source and cross-platform library for linking mobile and web application. It is available on NuGet and implemented for Android, iOS and UWP platforms.
+
+<br>
+
+### Setup
+* Available on NuGet: [https://www.nuget.org/packages/Zebble.AppLinks/](https://www.nuget.org/packages/Zebble.AppLinks/)
+* Install in your platform client projects.
+* Available for iOS, Android and UWP.
+<br>
+
+### Api Usage
+
 To use AppLinks in your Zebble application you can use below code to navigate to an URL which can be a web page or an application with specific URL and Identifier:
 
 ```csharp
@@ -22,7 +35,7 @@ The result is a type of “NavigationResult” in Zebble and it can be one of below 
 
 If the result is 0 or Failed, this means the metadata on the webpage is wrong or the application or webpage could not be found. Web result means the URL is referred to a webpage and the App result is refer to an application.
 
-### Handling Incoming AppLinks
+##### Handling Incoming AppLinks
 
 To handle the incoming links you do not need to use different code in all platforms but you need to make some changes in all platform to configure your application or web link. You can use below code to receive all incoming requests with parameters:
 
@@ -32,8 +45,11 @@ AppLinks.OnAppLinkReceived.Handle(parameters =>
      //Do something with parameters (call some page or something else)
 });
 ```
+### Platform Specific Notes
 
-##### Android:
+Some platforms require certain settings before it will open another application or website.
+
+#### Android:
 
 Firstly, you need to add this attribute to MainActivity class of Zebble Android application like below:
 
@@ -46,7 +62,7 @@ AutoVerify = true)]
 
 Then you can use “OnAppLinkReceived” event of Zebble AppLinks in anywhere you want like page initialization to receive incoming requests.
  
-##### IOS:
+#### IOS:
 
 In IOS platform you need to set the scheme and application URL in the “Info.plist” file like below:
 
@@ -73,7 +89,7 @@ In IOS platform you need to set the scheme and application URL in the “Info.plis
 
 After that configuration, you can use “OnAppLinkReceived” event like Android platform.
 
-##### UWP:
+#### UWP:
 
 In UWP platform you need to add a protocol extension into the UWP manifest file and set a name for your application like below:
 
@@ -97,7 +113,7 @@ In UWP platform you need to add a protocol extension into the UWP manifest file 
  
 After that, you can navigate to an URL like other platforms and receive an incoming request from other applications by using "OnAppLinkReceived" event.
 
-### App Link Specification
+#### App Link Specification
 
 To create and advertise your application in website and open the application you can use below meta-tags for each platform:
 ```html
@@ -120,3 +136,18 @@ To create and advertise your application in website and open the application you
 </head>
 </html>
 ```
+<br>
+
+
+### Events
+| Event             | Type                                          | Android | iOS | Windows |
+| :-----------      | :-----------                                  | :------ | :-- | :------ |
+| OnAppLinkReceived            | AsyncEvent<List<Data&gt;&gt;    | x       | x   | x       |
+
+<br>
+
+
+### Methods
+| Method       | Return Type  | Parameters                          | Android | iOS | Windows |
+| :----------- | :----------- | :-----------                        | :------ | :-- | :------ |
+| Navigate         | Task<NavigationResult&gt;| url -> string<br> | x       | x   | x       |
