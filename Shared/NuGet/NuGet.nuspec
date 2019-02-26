@@ -25,6 +25,12 @@
     <file src="..\..\Components\Rivets-1.0.5.1\ios\Rivets.xml" target="lib\Xamarin.iOS10\" />
     <file src="..\..\lib\Zebble.AppLinks.iOS.*" target="lib\Xamarin.iOS10\" />
     <file src="..\..\lib\Zebble.AppLinks.Android.*" target="lib\MonoAndroid10\" />
-    <file src="..\..\lib\Zebble.AppLinks.UWP.*" target="lib\UAP10\" />
+
+    <file src="..\..\lib\bin\ARM\Release\Zebble.AppLinks.UWP.*" target="runtimes\win10-arm\lib\uap10.0" />
+    <file src="..\..\lib\bin\x64\Release\Zebble.AppLinks.UWP.*" target="runtimes\win10-x64\lib\uap10.0" />
+    <file src="..\..\lib\bin\x86\Release\Zebble.AppLinks.UWP.*" target="runtimes\win10-x86\lib\uap10.0" />
+
+    <file src="..\..\lib\bin\Release\Zebble.AppLinks.UWP.*" target="ref\uap10.0" />
+    
   </files>
 </package>
