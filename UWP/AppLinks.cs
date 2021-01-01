@@ -13,10 +13,7 @@
     {
         static AppLinks()
         {
-            UIRuntime.OnActivated.Handle(args =>
-            {
-                GetAppLinkDatas(args);
-            });
+            UIRuntime.OnActivated.Handle(GetAppLinkDatas);
         }
 
         public static async Task<NavigationResult> Navigate(string url)

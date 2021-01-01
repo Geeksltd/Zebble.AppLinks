@@ -1,4 +1,4 @@
-[logo]: https://raw.githubusercontent.com/Geeksltd/Zebble.AppLinks/master/Shared/NuGet/Icon.png "Zebble.AppLinks"
+ï»¿[logo]: https://raw.githubusercontent.com/Geeksltd/Zebble.AppLinks/master/icon.png "Zebble.AppLinks"
 
 ## Zebble.AppLinks
 
@@ -27,7 +27,7 @@ To use AppLinks in your Zebble application you can use below code to navigate to
 var result = await AppLinks.Navigate(url);
 ```
 
-The result is a type of “NavigationResult” in Zebble and it can be one of below options:
+The result is a type of ï¿½NavigationResultï¿½ in Zebble and it can be one of below options:
 
 0)    Failed
 1)    Web
@@ -60,16 +60,16 @@ DataScheme = "http or https", DataHost = "web address or *",
 AutoVerify = true)]
 ```
 
-Then you can use “OnAppLinkReceived” event of Zebble AppLinks in anywhere you want like page initialization to receive incoming requests.
- 
+Then you can use ï¿½OnAppLinkReceivedï¿½ event of Zebble AppLinks in anywhere you want like page initialization to receive incoming requests.
+ï¿½
 #### IOS:
 
-In IOS platform you need to set the scheme and application URL in the “Info.plist” file like below:
+In IOS platform you need to set the scheme and application URL in the ï¿½Info.plistï¿½ file like below:
 
 ```xml
 <plist version="1.0">
   <dict>
-    …
+    ï¿½
     <key>CFBundleURLTypes</key>
     <array>
       <dict>
@@ -87,7 +87,7 @@ In IOS platform you need to set the scheme and application URL in the “Info.plis
 </plist>
 ```
 
-After that configuration, you can use “OnAppLinkReceived” event like Android platform.
+After that configuration, you can use ï¿½OnAppLinkReceivedï¿½ event like Android platform.
 
 #### UWP:
 
@@ -110,7 +110,7 @@ In UWP platform you need to add a protocol extension into the UWP manifest file 
     ..
 </Package>
 ```
- 
+ï¿½
 After that, you can navigate to an URL like other platforms and receive an incoming request from other applications by using "OnAppLinkReceived" event.
 
 #### App Link Specification
