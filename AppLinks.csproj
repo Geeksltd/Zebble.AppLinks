@@ -7,7 +7,7 @@
     <RootNamespace>Zebble</RootNamespace>
     <PackageId>Zebble.AppLinks</PackageId>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <Version>1.0.15.0</Version>
+    <Version>1.0.16.0</Version>
     <PackOnBuild>true</PackOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <LangVersion>default</LangVersion>
@@ -67,7 +67,7 @@
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.29" />
     <PackageReference Include="Rivets" Version="1.0.5" />
-    <PackageReference Include="Zebble" Version="4.5.423" />
+    <PackageReference Include="Zebble" Version="4.5.425" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Android\" />
