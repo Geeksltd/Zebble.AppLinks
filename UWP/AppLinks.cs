@@ -8,6 +8,7 @@
     using Windows.ApplicationModel.Activation;
     using Windows.System;
     using Windows.UI.Xaml.Controls;
+    using Olive;
 
     public static partial class AppLinks
     {
@@ -32,7 +33,7 @@
             }
             catch (Exception ex)
             {
-                Device.Log.Error(ex.Message);
+                Log.For(typeof(AppLinks)).Error(ex);
                 return NavigationResult.Failed;
             }
         }
