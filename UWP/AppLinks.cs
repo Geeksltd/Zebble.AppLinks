@@ -136,17 +136,7 @@
                 }
                 else
                 {
-                    var urlQuery = "";
-                    if (protocolArgs.Uri.OriginalString.Contains("//"))
-                    {
-                        urlQuery = protocolArgs.Uri.OriginalString.Substring(protocolArgs.Uri.OriginalString.IndexOf("//"));
-                    }
-                    else
-                    {
-                        urlQuery = protocolArgs.Uri.OriginalString;
-                    }
-
-                    result.AddRange(urlQuery.Split('/', StringSplitOptions.RemoveEmptyEntries).Select(x => new Data(x, "")));
+                    result.AddRange(UriToData(protocolArgs.Uri));
                 }
             }
 
