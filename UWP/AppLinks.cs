@@ -1,5 +1,6 @@
 ﻿namespace Zebble
 {
+    using Olive;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -8,7 +9,6 @@
     using Windows.ApplicationModel.Activation;
     using Windows.System;
     using Windows.UI.Xaml.Controls;
-    using Olive;
 
     public static partial class AppLinks
     {
@@ -122,14 +122,21 @@
             {
                 var protocolArgs = args.Item1 as ProtocolActivatedEventArgs;
 
-                var queries = protocolArgs.Uri.Query.Replace("?", string.Empty).Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-
-                foreach (var query in queries)
+                if (!string.IsNullOrEmpty(protocolArgs.Uri.Query))
                 {
-                    if (!query.Contains("=")) continue;
+                    var queries = protocolArgs.Uri.Query.Replace("?", string.Empty).Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
 
-                    var parameter = query.Split(new string[] { "=" }, StringSplitOptions.RemoveEmptyEntries);
-                    result.Add(new Data(parameter[0], parameter[1]));
+                    foreach (var query in queries)
+                    {
+                        if (!query.Contains("=")) continue;
+
+                        var parameter = query.Split(new string[] { "=" }, StringSplitOptions.RemoveEmptyEntries);
+                        result.Add(new Data(parameter[0], parameter[1]));
+                    }
+                }
+                else
+                {
+                    result.AddRange(UriToData(protocolArgs.Uri));
                 }
             }
 

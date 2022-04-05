@@ -1,5 +1,6 @@
 ﻿namespace Zebble
 {
+    using System;
     using System.Collections.Generic;
 
     public static partial class AppLinks
@@ -21,7 +22,10 @@
                     foreach (var param in appLinkUrl.InputQueryParameters)
                         result.Add(new Data(param.Key, param.Value));
             }
-
+            else if (Uri.TryCreate(intent.DataString, UriKind.Absolute, out Uri uri))
+            {
+                result.AddRange(UriToData(uri));
+            }
             OnAppLinkReceived?.Raise(result);
         }
     }

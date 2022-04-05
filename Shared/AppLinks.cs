@@ -1,11 +1,28 @@
 ﻿namespace Zebble
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     public static partial class AppLinks
     {
         public static AsyncEvent<List<Data>> OnAppLinkReceived = new AsyncEvent<List<Data>>();
+
+        static List<Data> UriToData(Uri uri)
+        {
+            var urlQuery = "";
+            if (uri.OriginalString.Contains("//"))
+            {
+                urlQuery = uri.OriginalString.Substring(uri.OriginalString.IndexOf("//"));
+            }
+            else
+            {
+                urlQuery = uri.OriginalString;
+            }
+
+            return urlQuery.Split('/', StringSplitOptions.RemoveEmptyEntries).Select(x => new Data(x, "")).ToList();
+        }
 
 #if ANDROID || IOS
         public static Task<NavigationResult> Navigate(string url)
