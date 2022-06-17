@@ -2,13 +2,11 @@
 {
     using Foundation;
     using System.Collections.Generic;
+    using System.Linq;
 
     public static partial class AppLinks
     {
-        static AppLinks()
-        {
-            UIRuntime.OnOpenUrl.Handle(url => ExtractAppLinkData(url));
-        }
+        static AppLinks() => UIRuntime.OnOpenUrl.Handle(ExtractAppLinkData);
 
         static void ExtractAppLinkData(NSUrl url)
         {
@@ -19,7 +17,7 @@
                 foreach (var param in rurl.InputQueryParameters)
                     result.Add(new Data(param.Key, param.Value));
 
-            OnAppLinkReceived?.Raise(result);
+            if (result.Any()) OnAppLinkReceived.Raise(result);
         }
     }
 }

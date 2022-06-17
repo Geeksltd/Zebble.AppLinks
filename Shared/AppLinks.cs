@@ -4,23 +4,15 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Olive;
 
     public static partial class AppLinks
     {
-        public static AsyncEvent<List<Data>> OnAppLinkReceived = new AsyncEvent<List<Data>>();
+        public static AsyncEvent<List<Data>> OnAppLinkReceived = new();
 
         static List<Data> UriToData(Uri uri)
         {
-            var urlQuery = "";
-            if (uri.OriginalString.Contains("//"))
-            {
-                urlQuery = uri.OriginalString.Substring(uri.OriginalString.IndexOf("//"));
-            }
-            else
-            {
-                urlQuery = uri.OriginalString;
-            }
-
+            var urlQuery = uri.OriginalString.RemoveBeforeAndIncluding("//");
             return urlQuery.Split('/', StringSplitOptions.RemoveEmptyEntries).Select(x => new Data(x, "")).ToList();
         }
 
