@@ -10,6 +10,18 @@
     {
         public static AsyncEvent<List<Data>> OnAppLinkReceived = new();
 
+        static List<Data> QueryToData(string rawQuery)
+        {
+            var queries = rawQuery.Remove("?")
+                .Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+
+            return queries.Except(q => q.Lacks("=")).Select(query =>
+            {
+                var parameters = query.Split(new string[] { "=" }, StringSplitOptions.RemoveEmptyEntries);
+                return new Data(parameters.FirstOrDefault(), parameters.LastOrDefault());
+            }).ToList();
+        }
+
         static List<Data> UriToData(Uri uri)
         {
             var urlQuery = uri.OriginalString.RemoveBeforeAndIncluding("//");

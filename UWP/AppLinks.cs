@@ -21,19 +21,7 @@
             {
                 var protocolArgs = args.Item1 as ProtocolActivatedEventArgs;
 
-                if (protocolArgs.Uri.Query.HasValue())
-                {
-                    var queries = protocolArgs.Uri.Query.Replace("?", string.Empty)
-                        .Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-
-                    foreach (var query in queries)
-                    {
-                        if (query.Lacks("=")) continue;
-
-                        var parameter = query.Split(new string[] { "=" }, StringSplitOptions.RemoveEmptyEntries);
-                        result.Add(new Data(parameter[0], parameter[1]));
-                    }
-                }
+                if (protocolArgs.Uri.Query.HasValue()) result.AddRange(QueryToData(protocolArgs.Uri.Query));
                 else result.AddRange(UriToData(protocolArgs.Uri));
             }
 
