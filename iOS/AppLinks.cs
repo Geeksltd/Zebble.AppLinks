@@ -6,7 +6,11 @@
 
     public static partial class AppLinks
     {
-        static AppLinks() => UIRuntime.OnOpenUrl.Handle(ExtractAppLinkData);
+        static AppLinks()
+        {
+            UIRuntime.OnOpenUrl.Handle(ExtractAppLinkData);
+            UIRuntime.OnOpenUrlWithOptions.Handle(@params => ExtractAppLinkData(@params.Item2));
+        }
 
         static void ExtractAppLinkData(NSUrl url)
         {
