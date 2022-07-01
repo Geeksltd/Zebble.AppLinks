@@ -8,7 +8,14 @@
 
     public static partial class AppLinks
     {
-        public static AsyncEvent<List<Data>> OnAppLinkReceived = new();
+        static readonly AsyncEvent<List<Data>> OnAppLinkReceived = new();
+        static string[] DataPrefixes;
+
+        public static void Configure(Action<List<Data>> onAppLinkReceived, params string[] dataPrefixes)
+        {
+            OnAppLinkReceived.Handle(onAppLinkReceived);
+            DataPrefixes = dataPrefixes;
+        }
 
         static List<Data> QueryToData(string rawQuery)
         {
@@ -22,10 +29,14 @@
             }).ToList();
         }
 
-        static List<Data> UriToData(Uri uri)
+        static IEnumerable<Data> UriToData(Uri uri)
         {
-            var urlQuery = uri.OriginalString.RemoveBeforeAndIncluding("//");
-            return urlQuery.Split('/', StringSplitOptions.RemoveEmptyEntries).Select(x => new Data(x, "")).ToList();
+            var urlQuery = uri.AbsoluteUri;
+
+            DataPrefixes.OrEmpty().OrderByDescending(x => x).Do(x => urlQuery = urlQuery.RemoveBeforeAndIncluding(x));
+
+            return urlQuery.Split('/', StringSplitOptions.RemoveEmptyEntries).Chop(2)
+                           .Select(x => new Data(x.FirstOrDefault(), x.LastOrDefault()));
         }
 
 #if ANDROID || IOS

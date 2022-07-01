@@ -1,6 +1,8 @@
 ﻿namespace Zebble
 {
     using Foundation;
+    using Olive;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -15,11 +17,22 @@
         static void ExtractAppLinkData(NSUrl url)
         {
             var result = new List<Data>();
-            var rurl = new Rivets.AppLinkUrl(url.ToString());
 
-            if (rurl != null)
-                foreach (var param in rurl.InputQueryParameters)
+
+            Rivets.AppLinkUrl appLinkUrl = null;
+            try { appLinkUrl = new(url.ToString()); }
+            catch { }
+
+            if (appLinkUrl != null)
+            {
+                foreach (var param in appLinkUrl.InputQueryParameters)
                     result.Add(new Data(param.Key, param.Value));
+            }
+            else if (Uri.TryCreate(url.ToString(), UriKind.Absolute, out Uri uri))
+            {
+                if (uri.Query.HasValue()) result.AddRange(QueryToData(uri.Query));
+                else result.AddRange(UriToData(uri));
+            }
 
             if (result.Any()) OnAppLinkReceived.Raise(result);
         }
