@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
     using Olive;
 
     public static partial class AppLinks
@@ -38,33 +37,6 @@
             return urlQuery.Split('/', StringSplitOptions.RemoveEmptyEntries).Chop(2)
                            .Select(x => new Data(x.FirstOrDefault(), x.LastOrDefault()));
         }
-
-#if ANDROID || IOS
-        public static Task<NavigationResult> Navigate(string url)
-        {
-            return Thread.UI.Run(async () =>
-            {
-                NavigationResult result;
-                var navigatorResult = await Rivets.AppLinks.Navigator.Navigate(url);
-
-                switch (navigatorResult)
-                {
-                    case Rivets.NavigationResult.Web:
-                        result = NavigationResult.Web;
-                        break;
-                    case Rivets.NavigationResult.App:
-                        result = NavigationResult.App;
-                        break;
-                    case Rivets.NavigationResult.Failed:
-                    default:
-                        result = NavigationResult.Failed;
-                        break;
-                }
-
-                return result;
-            });
-        }
-#endif
 
         public class Data
         {

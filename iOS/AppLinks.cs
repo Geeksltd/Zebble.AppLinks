@@ -18,17 +18,7 @@
         {
             var result = new List<Data>();
 
-
-            Rivets.AppLinkUrl appLinkUrl = null;
-            try { appLinkUrl = new(url.ToString()); }
-            catch { }
-
-            if (appLinkUrl != null)
-            {
-                foreach (var param in appLinkUrl.InputQueryParameters)
-                    result.Add(new Data(param.Key, param.Value));
-            }
-            else if (Uri.TryCreate(url.ToString(), UriKind.Absolute, out Uri uri))
+            if (Uri.TryCreate(url.ToString(), UriKind.Absolute, out Uri uri))
             {
                 if (uri.Query.HasValue()) result.AddRange(QueryToData(uri.Query));
                 else result.AddRange(UriToData(uri));
