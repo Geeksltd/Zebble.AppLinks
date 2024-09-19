@@ -8,7 +8,7 @@
 
     public static partial class AppLinks
     {
-        static AppLinks() => UIRuntime.OnActivated.Handle(ExtractAppLinkData);
+        //static AppLinks() => UIRuntime.OnActivated.Handle(ExtractAppLinkData);
 
         static void ExtractAppLinkData(Tuple<IActivatedEventArgs, Microsoft.UI.Xaml.Window> args)
         {
