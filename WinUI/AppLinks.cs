@@ -4,13 +4,13 @@
     using System;
     using System.Collections.Generic;
     using Windows.ApplicationModel.Activation;
-    using Windows.UI.Xaml.Controls;
+    using Microsoft.UI.Xaml.Controls;
 
     public static partial class AppLinks
     {
         static AppLinks() => UIRuntime.OnActivated.Handle(ExtractAppLinkData);
 
-        static void ExtractAppLinkData(Tuple<IActivatedEventArgs, Windows.UI.Xaml.Window> args)
+        static void ExtractAppLinkData(Tuple<IActivatedEventArgs, Microsoft.UI.Xaml.Window> args)
         {
             var result = new List<Data>();
             var rootFrame = args.Item2.Content as Frame ?? new Frame();
