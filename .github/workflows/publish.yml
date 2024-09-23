@@ -21,6 +21,6 @@ jobs:
     - name: Install Zebble's CLI tools
       run: dotnet tool install --global zebble-build
       
-    - name: Publish a new Zebble package
+    - name: Publish a new Zebble.AppLinks package
       run: zebble-build update-plugin --api-key ${{secrets.NUGET_API_KEY}} --publish
       working-directory: Zebble.AppLinks
